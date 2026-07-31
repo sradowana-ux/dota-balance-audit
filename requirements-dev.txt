@@ -1,6 +1,5 @@
-# Everything in requirements.txt, plus what is needed to rebuild the dataset,
-# retrain, and regenerate the figures.
 -r requirements.txt
+duckdb>=1.0
 requests>=2.31
 statsmodels>=0.14
 matplotlib>=3.8

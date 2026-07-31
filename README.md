@@ -1,196 +1,229 @@
-# Dota 2 Draft Win Predictor
+# Is Dota 2 Balanced?
 
-Predicting match outcome from **the ten hero picks alone** — no player skill, no
-items, no in-game events — on public ranked matches from the OpenDota API.
+A statistical audit of hero, side and draft balance across 53,802 ranked
+matches from the OpenDota API.
 
-[![Demo](https://img.shields.io/badge/LIVE_DEMO-c8aa6e?style=flat-square&labelColor=0d1117)](https://huggingface.co/spaces/Radowana/dota-draft-predictor)
+[![Demo](https://img.shields.io/badge/LIVE_DEMO-c8aa6e?style=flat-square&labelColor=0d1117)](https://huggingface.co/spaces/Radowana/dota-balance-audit)
 [![Python](https://img.shields.io/badge/PYTHON-3.10+-c8aa6e?style=flat-square&labelColor=0d1117)](https://www.python.org)
+[![SQL](https://img.shields.io/badge/SQL-DUCKDB-c8aa6e?style=flat-square&labelColor=0d1117)](https://duckdb.org)
 [![License](https://img.shields.io/badge/LICENSE-MIT-c8aa6e?style=flat-square&labelColor=0d1117)](LICENSE)
 
-This is a deliberately small question asked carefully. Draft-only prediction has
-a low ceiling — most of what decides a Dota match happens after the draft — so
-the interesting part is not the headline accuracy but whether the model beats
-the baselines a sceptic would actually propose, and whether the improvement
-survives a significance test.
+Valve rebalances Dota 2 every few weeks across 126 heroes. This asks whether it
+works, and — more usefully — how anyone would be able to tell.
+
+**Short answer: yes, tightly, with three specific exceptions and one structural
+imbalance nobody can patch.** The longer answer is that the interesting problem
+here is not measuring balance but deciding what counts as imbalance, because at
+this sample size statistical significance stops being a useful filter.
 
 ---
 
-## Results
+## Findings
 
-<!-- RESULTS:START -->
+<!-- FINDINGS:START -->
 
-Trained on **43,041** matches, evaluated on **10,761** strictly later matches (127 heroes, 53,802 total after filtering). Radiant won 53.3% of the held-out matches.
+Based on **53,802** ranked All Draft matches, covering **126** heroes with at least 500 games each.
 
-| Model | Accuracy | Log loss | ROC-AUC | Brier |
+### 1. The roster is tightly balanced, but not perfectly
+
+Win rates span **42.2% to 54.6%** — a 12.4 point range, standard deviation 2.63pp. For a game with 126 asymmetric heroes, that is a narrow band.
+
+| | Hero | Games | Win rate | 95% CI |
 |---|---|---|---|---|
-| Always predict Radiant *(baseline)* | 0.5326 | 0.6910 | — | 0.2490 |
-| Solo hero win-rate sum *(baseline)* | 0.5591 | 0.6809 | 0.5816 | 0.2439 |
-| **Logistic regression, signed hero features** | 0.5594 | 0.6805 | 0.5825 | 0.2437 |
-| Logistic regression + synergy/counter pairs | 0.5649 | **0.6798** | 0.5855 | 0.2434 |
-| Gradient boosting (HistGBM) | 0.5575 | 0.6836 | 0.5711 | 0.2452 |
+| ▲ | Spectre | 6,989 | 54.6% | [53.5%, 55.8%] |
+| ▲ | Wraith King | 6,381 | 54.3% | [53.1%, 55.6%] |
+| ▲ | Snapfire | 11,117 | 54.2% | [53.3%, 55.1%] |
+| ▼ | Gyrocopter | 1,415 | 42.2% | [39.6%, 44.8%] |
+| ▼ | Nature's Prophet | 4,662 | 42.7% | [41.3%, 44.2%] |
+| ▼ | Monkey King | 2,719 | 43.1% | [41.3%, 45.0%] |
 
-**McNemar's test** on paired held-out predictions, logistic regression vs:
+### 2. At this sample size, statistical significance is the wrong question
 
-| Compared against | χ² | p | Verdict |
-|---|---|---|---|
-| Always predict Radiant (baseline) | 23.01 | 1.61e-06 | significant at α=0.05 |
-| Solo hero win-rate sum (baseline) | 0.02 | 0.8913 | no significant difference |
-| Logistic regression + synergy/counter pairs | 2.33 | 0.1265 | no significant difference |
-| Gradient boosting (HistGBM) | 0.19 | 0.6633 | no significant difference |
+Testing every hero against 50%, **63 of 126** come back significant at α=0.05 — against roughly 6 expected by chance. Applying Benjamini–Hochberg FDR correction removes almost nothing: **59** still survive.
 
-<!-- RESULTS:END -->
+That is the finding, not a footnote. With 50,000 matches the tests are so well powered that a hero sitting 0.8 points off even is detectable — and completely irrelevant to a balance decision. **Significance stopped discriminating; effect size has to do the work.**
 
-Every number above is generated from `artifacts/report.json` by
-`eval/render_results.py`, not typed by hand. `python eval/render_results.py --check`
-fails if the README and the artifacts disagree.
+Applying a practical tolerance of ±2pp and requiring the whole confidence interval to clear it, the 59 "significant" heroes reduce to **18 genuinely actionable ones**:
+
+- **Overperforming (3):** Snapfire, Wraith King, Spectre
+- **Underperforming (15):** Gyrocopter, Nature's Prophet, Monkey King, Beastmaster, Doom, Shadow Demon, Kez, Tiny, Tusk, Huskar, Alchemist, Timbersaw, Muerta, Queen of Pain, Windranger
+
+### 3. Radiant's map advantage is real and larger than any hero effect
+
+Radiant wins **52.98%** of matches [52.56%, 53.40%], p = 1.7e-43 — a **3.0 point** structural edge before a single hero is picked. Only three heroes deviate from even by more than the side you were assigned does.
+
+### 4. "Balanced" means different things at different ranks
+
+Correlating hero win rates between the lowest and highest skill brackets gives **r = 0.30** across 82 heroes (p = 6.4e-03). Positive, but weak: a hero's performance at low rank tells you comparatively little about its performance at high rank. A single global win rate averages over two genuinely different games.
+
+### 5. How much does the draft decide?
+
+Using the win-probability model as a measuring instrument across 10,761 held-out drafts:
+
+| Measure | Value |
+|---|---|
+| Draft-implied win probability, full range | 0.244 – 0.808 |
+| 1st–99th percentile | 0.367 – 0.686 |
+| Median advantage off even | 5.15pp |
+| Drafts moving win probability >5pp | 51.1% |
+| Model accuracy from draft alone | 55.9% |
+| Information ceiling for this model class | 57.0% |
+
+The honest held-out model sits **1.02 points** below the ceiling obtained by fitting and scoring on all data with no regularisation. The limit is the information in a draft, not the modelling.
+
+### 6. Confirming a balance patch is expensive
+
+Detecting a **2pp** win-rate change at 80% power requires **9,806 hero-games before and after** the patch.
+
+| Change to detect | Hero-games needed per period |
+|---|---|
+| 0.5pp | 156,973 |
+| 1.0pp | 39,240 |
+| 2.0pp | 9,806 |
+| 3.0pp | 4,356 |
+| 5.0pp | 1,565 |
+
+Converted through real pick rates, the median hero needs **170,547 matches** played before a 2pp change becomes visible. The spread is enormous: Pudge (picked in 29.1% of games) needs 33,671, while Elder Titan (1.0%) needs 1,026,425.
+
+<!-- FINDINGS:END -->
 
 <p align="center">
-  <img src="assets/calibration.png" alt="Calibration curve" width="46%"/>
-  <img src="assets/hero_effects.png" alt="Strongest hero effects" width="46%"/>
+  <img src="assets/hero_balance.png" alt="Hero win rates with confidence intervals" width="52%"/>
 </p>
+<p align="center">
+  <img src="assets/bracket_divergence.png" alt="Balance across skill brackets" width="45%"/>
+  <img src="assets/draft_determinism.png" alt="Draft-implied win probability" width="50%"/>
+</p>
+<p align="center">
+  <img src="assets/power_curve.png" alt="Power analysis" width="92%"/>
+</p>
+
+Every number in the findings above is generated from `artifacts/*.json` by
+`analysis/render_report.py`. CI fails the build if the README and the artifacts
+disagree, so the report cannot drift away from what the code produced.
 
 ---
 
-## How to read these numbers
+## Recommendation
 
-**The signal is real but small, and the honest framing matters more than the
-decimal places.** A draft-only model that reports ~56% accuracy is not a weak
-attempt at a 90% problem; it is close to the information ceiling of the inputs.
-Ten hero IDs cannot tell you who played better.
+If this were a balance review, the actions would be:
 
-Several things are worth pointing out, including the ones that do not flatter the
-model:
+**1. Act on three heroes, not fifty-nine.** Snapfire, Wraith King and Spectre
+are the only heroes whose entire confidence interval sits above the +2pp
+tolerance band. The other fifty-six "statistically significant" heroes are
+significant only because the sample is large, and adjusting them would be
+responding to noise with extra steps.
 
-**The trivial baseline is not the one to beat.** "Always predict Radiant" scores
-above 50% purely because Radiant has a real map advantage. Any model that only
-clears *that* bar has learned which side of the map it is on and nothing else.
-The second baseline — add up each hero's solo win rate, pick the higher side —
-is what a competent analyst would do without machine learning, and it is a much
-harder bar.
+**2. Treat the fifteen underperformers as one problem, not fifteen.** They are
+disproportionately high-execution heroes — Monkey King, Queen of Pain,
+Timbersaw, Nature's Prophet. A hero that requires skill to pilot *should* show a
+sub-50% average across all ranks; that is the mechanic working, not a bug. Buffing
+them uniformly would break them at the top. This is where a global win rate is
+actively misleading and the per-bracket split has to drive the decision.
 
-**Accuracy and log loss disagree, and log loss is the one to trust here.** The
-solo win-rate baseline is competitive on raw accuracy, because near the decision
-boundary the two methods flip the same coins. The logistic model wins on log
-loss and Brier score, which is to say it is better at knowing *how* confident to
-be. For a win-probability model that is the property that matters; accuracy
-throws away everything except which side of 0.5 you landed on.
+**3. Do not attempt to balance rarely-picked heroes on win rate.** With a pick
+rate near 1%, confirming a 2pp change on Elder Titan needs over a million
+matches. Any patch note claiming a measured effect on a niche hero within a
+normal patch cycle is describing noise. Use qualitative review for the long tail
+and reserve statistical balancing for the top ~30 heroes by pick rate, where the
+data arrives fast enough to support it.
 
-**Pairwise synergy and counter features help slightly, but not provably.**
-The standard claim about draft models is that hero interactions carry much of
-the signal. Adding ~16,000 synergy and counter columns does edge ahead of the
-127-column linear model on every metric — but McNemar's test cannot distinguish
-them (p ≈ 0.13), so the honest reading is "probably a small real gain, not
-demonstrated at this sample size". Each hero pair appears in only a few dozen
-matches out of 54,000, so most of those 16,000 weights are still fit largely
-from noise.
+**4. Report Radiant advantage separately from hero balance.** A 3-point side
+edge is larger than all but three hero effects, and it contaminates every
+win-rate comparison that does not control for it.
 
-**The shipped model is therefore the 127-feature linear one**, not the
-best-scoring one. When two models are statistically indistinguishable, the
-tie-breaker is the one whose predictions decompose exactly into per-hero terms,
-because that is what the demo shows the user. Picking the marginally better
-number over the explainable model would be optimising the leaderboard rather
-than the product.
-
-**Face validity.** The learned weights are not just numerically better than
-chance, they line up with how the game is understood: the strongest negative
-weights land on high-skill-floor heroes (Storm Spirit, Tinker, Monkey King,
-Nature's Prophet) and the strongest positive ones on forgiving, low-execution
-heroes (Wraith King, Spectre, Abaddon, Dazzle). That pattern is well known to
-Dota players and was nowhere in the training signal — the model only ever saw
-hero IDs and win/loss. It is a sanity check, not evidence of accuracy, but a
-model that got this backwards would be worth distrusting.
+**What would change my mind:** a second data window either side of a real patch.
+This audit is a snapshot, so it can measure the state of balance but not whether
+Valve's interventions are what produced it. That is the obvious next study, and
+the power analysis above is what sizes it.
 
 ---
 
 ## Method
 
-### Signed hero encoding
-
-A draft is two sets of five heroes. The obvious encoding gives each hero two
-columns, one per side, for `2 × n_heroes` features. That lets the model learn
-two unrelated weights for the same hero, which is wrong — Dota is close to
-side-symmetric, so a hero worth `+w` to Radiant should be worth `−w` to Dire.
-
-This project uses one column per hero instead:
+### Pipeline
 
 ```
-x[h] = +1  if hero h is on Radiant
-       -1  if hero h is on Dire
-        0  otherwise
+data/matches.csv.gz  →  sql/  →  analysis/  →  artifacts/  →  README + figures
+   93,112 matches      DuckDB    statistics     JSON/CSV
 ```
 
-That halves the parameter count and makes the antisymmetry exact rather than
-approximate: mirroring a draft flips the log-odds about the intercept, so
-`P(radiant | draft) = 1 − P(radiant | mirrored draft)` holds by construction.
-Radiant's map advantage is then absorbed cleanly into the intercept, which is
-where a side effect belongs — it is a property of the map, not of any hero.
+SQL does the aggregation, Python does the statistics. That split is deliberate:
+the counting is set-shaped work that belongs in a database, and keeping it there
+means the aggregates can be inspected independently of the tests applied to them.
 
-Because the model is linear in these features, the prediction decomposes
-exactly:
+`sql/01_build_tables.sql` unpivots each match's two hero lists into one row per
+hero per match — the grain almost every balance question is actually asked at —
+and asserts that every match produces exactly ten rows. If that check fails the
+pipeline aborts, because a broken unpivot would silently corrupt every number
+downstream.
 
-```
-logit(p) = intercept + Σ w_h over Radiant heroes − Σ w_h over Dire heroes
-```
+### Statistical choices
 
-The demo shows that decomposition per hero. Nothing is approximated for the sake
-of interpretability, because nothing needs to be.
+**Wilson intervals, not normal approximation.** Win rates sit near 0.5 with
+sample sizes from 500 to 15,000. Wilson behaves correctly across that range;
+the normal approximation misbehaves in the tails.
 
-### Evaluation design
+**Benjamini–Hochberg, not Bonferroni.** This is a screening exercise — the goal
+is a shortlist of heroes worth investigating, so controlling the false discovery
+rate is both more appropriate and more powerful than controlling the
+family-wise error rate.
 
-* **Chronological split.** Test matches are strictly newer than every training
-  match. A random split would let the model see matches from either side of any
-  patch or meta shift inside the window.
-* **Two baselines, one trivial and one not.** Described above.
-* **Calibration, not just accuracy.** Reliability curve, Brier score, and log
-  loss, because the demo hands users a probability and that probability should
-  mean something.
-* **McNemar's test** on the paired held-out predictions, which is the right test
-  for comparing two classifiers on the same test set — it conditions on the
-  cases where the models disagree instead of treating the two accuracy figures
-  as independent samples.
-* **Hyperparameters chosen by `TimeSeriesSplit` CV on the training set only.**
-  The test set is touched once, at the end.
+**A tolerance band, declared separately from significance.** Set at ±2pp and
+stated as a judgement, not derived from the data. A hero must have its *entire*
+confidence interval outside the band to be flagged, so the data has to rule out
+"only slightly off" before anything is recommended. Conflating statistical and
+practical significance is the most common way an analyst misleads their own
+stakeholders, and at n = 53,802 it is unavoidable unless handled explicitly.
+
+**The model as an instrument.** The win-probability model
+(`src/train.py`, logistic regression on signed hero indicators) is not the
+product here. It exists to measure how much outcome the draft explains. Its
+modest accuracy is the evidence, not an apology — and the in-sample ceiling
+shows it is within about a point of everything a hero-additive model could
+extract. Model details, baselines and calibration are in
+[docs/MODEL.md](docs/MODEL.md).
 
 ### Data
 
-Public matches from the OpenDota API, filtered to:
-
 | Filter | Reason |
 |---|---|
-| `game_mode == 22` (All Draft) | Turbo has roughly half the duration and a different economy, so hero win rates there come from a different distribution |
-| Ten distinct non-zero hero IDs | OpenDota returns zero-filled hero arrays for matches its parser hasn't reached |
-| `duration >= 900s` | Excludes early abandons, where the outcome reflects a disconnect rather than the draft |
-| `avg_rank_tier` present | Guarantees every row can be bucketed by skill |
+| `game_mode = 22` (All Draft) | Turbo has roughly half the duration and a different economy; hero win rates there are a different distribution |
+| Ten distinct non-zero hero IDs | OpenDota zero-fills hero arrays for matches its parser hasn't reached |
+| `duration >= 900s` | Excludes early abandons, where the result reflects a disconnect rather than play |
+| `avg_rank_tier` present | Every row must be bucketable by skill |
+| `games >= 500` per hero | Below this the win rate is too noisy to act on |
 
-The exact dataset used for the reported numbers is committed to `data/matches.csv.gz`,
-so the results reproduce without re-hitting the API.
+93,112 matches collected, 53,802 surviving the All Draft filter. The exact
+dataset is committed, so every number reproduces without touching the API.
 
 ---
 
 ## Reproduce
 
 ```bash
-git clone https://github.com/sradowana-ux/dota-draft-predictor
-cd dota-draft-predictor
+git clone https://github.com/sradowana-ux/dota-balance-audit
+cd dota-balance-audit
 pip install -r requirements-dev.txt
 
-python src/train.py                  # trains, evaluates, writes artifacts/
-python eval/make_plots.py            # calibration + hero-effect figures
-python eval/render_results.py        # regenerates the README table
+python analysis/balance.py        # hero tests, BH correction, side balance
+python analysis/power.py          # experiment sizing
+python analysis/determinism.py    # how much the draft explains
+python analysis/figures.py        # all four figures
+python analysis/render_report.py  # regenerate the findings block
 ```
 
-To rebuild the dataset from scratch (~20 minutes; the public API allows 60
-calls/minute and roughly 100 matches arrive per call):
+Rebuild the dataset from scratch (~25 minutes; the public API allows 60
+calls/minute):
 
 ```bash
-python src/collect.py --target 60000 --out data/matches.csv
+python src/collect.py --target 100000 --out data/matches.csv
 ```
 
-Run the demo locally:
+Run the dashboard locally:
 
 ```bash
-pip install -r requirements.txt
-python app.py
+pip install -r requirements.txt && python app.py
 ```
 
 ---
@@ -198,54 +231,47 @@ python app.py
 ## Project structure
 
 ```
-src/collect.py         OpenDota collection with the quality filters above
-src/features.py        signed hero encoding + synergy/counter pair encoding
-src/train.py           baselines, models, McNemar's test, artifacts/report.json
-eval/make_plots.py     calibration curve, strongest hero effects
-eval/render_results.py generates the README results block from report.json
-app.py                 Gradio demo with per-hero log-odds breakdown
-data/matches.csv.gz       the exact dataset behind the reported numbers
-data/heroes.csv        hero ID → name, attribute, roles
+sql/01_build_tables.sql       unpivot to hero-match grain, integrity assertion
+sql/02_hero_winrates.sql      win/pick rates overall, by bracket, by side
+analysis/balance.py           binomial tests, Wilson CIs, BH correction
+analysis/power.py             minimum detectable effect, matches required
+analysis/determinism.py       how much outcome the draft explains
+analysis/figures.py           the four figures
+analysis/render_report.py     generates the README findings block
+src/collect.py                OpenDota collection with quality filters
+src/features.py               signed hero encoding
+src/train.py                  the measuring instrument + its baselines
+tests/                        encoding properties, incl. exact antisymmetry
+app.py                        balance dashboard + draft explorer
 ```
 
 ---
 
 ## Limitations
 
-Stated plainly, because the model is easy to over-sell:
+1. **A snapshot, not a time series.** All matches come from one contiguous
+   window, so this measures the state of balance, not whether patches caused it.
 
-1. **The ceiling is low and this model is near it.** Draft explains a small
-   fraction of match outcome. Anyone reporting draft-only accuracy far above
-   these figures on public matches is either using post-draft information,
-   evaluating on a random rather than chronological split, or leaking player
-   identity.
+2. **Public matchmaking, not professional play.** All Draft has no ban phase and
+   no coordinated counter-picking. None of this transfers to captains mode.
 
-2. **No player skill.** Two identical drafts played by a Herald stack and an
-   Immortal stack get identical predictions. `avg_rank_tier` is collected but
-   deliberately not used as a feature — it says nothing about which *side* wins,
-   and including it would inflate apparent performance without improving the
-   thing the demo actually does.
+3. **Pick rate and win rate are entangled.** A hero can hold 50% because it is
+   balanced, or because only specialists pick it. This audit does not separate
+   selection effects from hero strength, and that is a real confound for the
+   long tail.
 
-3. **The chronological split spans a narrow window.** The matches were collected
-   in one pass over a short slice of time, so while the split is genuinely
-   forward-looking, it does not test robustness across a patch boundary. Hero
-   balance changes would degrade these weights, and this evaluation cannot say
-   how fast.
+4. **Bracket comparison is underpowered at the extremes.** Bracket 1 has 2,341
+   matches, so the low-versus-high correlation rests on 82 heroes clearing the
+   per-bracket threshold rather than the full roster.
 
-4. **Public matchmaking, not professional drafts.** In All Draft there is no
-   ban phase and no coordinated counter-picking, so the drafts are far less
-   structured than in captains mode. Weights learned here should not be read as
-   claims about competitive Dota.
+5. **Region and time of day are uncontrolled.** Matches come from a contiguous
+   ID range, so the population mix reflects whoever was queuing during that
+   window.
 
-5. **Hero interactions are not in the shipped model.** The pairwise experiment
-   above scored slightly better but could not be distinguished from the linear
-   model, so shipping it would have meant trading exact interpretability for an
-   unproven gain. More data — on the order of hundreds of thousands of matches —
-   is the prerequisite for revisiting that, not a better optimiser.
-
-6. **Single-window sampling.** Matches come from a contiguous ID range rather
-   than a stratified sample across regions and times of day, so the skill and
-   region mix reflects whoever was playing during that window.
+6. **The ±2pp tolerance is a judgement.** It is stated rather than derived, and
+   a designer with different priorities would reasonably choose differently. The
+   pipeline exposes it as a single constant so it can be changed and the whole
+   analysis rerun.
 
 ---
 
@@ -254,4 +280,4 @@ Stated plainly, because the model is easy to over-sell:
 MIT — see [LICENSE](LICENSE).
 
 Match data from the [OpenDota API](https://docs.opendota.com/), used under its
-terms. This project is not affiliated with Valve Corporation.
+terms. Not affiliated with Valve Corporation.
