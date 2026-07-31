@@ -20,6 +20,26 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
+# --------------------------------------------------------------------------
+# Hugging Face ZeroGPU shim.
+#
+# This app is pure CPU: a 127-parameter logistic regression plus pandas. It
+# needs no GPU. But Hugging Face's free tier runs all Gradio Spaces on ZeroGPU
+# hardware, and that runtime refuses to start unless at least one @spaces.GPU
+# function is registered at import time. The function below exists only to
+# satisfy that check and is never called. The import is guarded so the app
+# still runs locally, where the `spaces` package is absent.
+try:
+    import spaces
+
+    @spaces.GPU(duration=1)
+    def _zerogpu_startup_probe():
+        return None
+
+except ImportError:
+    pass
+
+
 ROOT = Path(__file__).parent
 ARTIFACTS = ROOT / "artifacts"
 REPO_URL = "https://github.com/sradowana-ux/dota-balance-audit"
@@ -43,6 +63,19 @@ NAME_TO_ID = {v: k for k, v in ID_TO_NAME.items()}
 HERO_NAMES = sorted(NAME_TO_ID)
 
 TOL = balance["tolerance_pp"] / 100
+
+# A Gradio Dropdown with no explicit value silently defaults to its first
+# choice, which would open this tab on ten copies of the same hero -- an
+# invalid draft. Seed it with a real, illustrative matchup instead: the three
+# heroes this audit flags as overperforming against three it flags as
+# underperforming, which shows the widest draft edge the model ever produces.
+DEFAULT_RADIANT = ["Spectre", "Wraith King", "Snapfire", "Dazzle", "Lich"]
+DEFAULT_DIRE = ["Monkey King", "Gyrocopter", "Timbersaw", "Queen of Pain", "Doom"]
+DEFAULT_RADIANT = [h for h in DEFAULT_RADIANT if h in NAME_TO_ID]
+DEFAULT_DIRE = [h for h in DEFAULT_DIRE if h in NAME_TO_ID]
+if len(DEFAULT_RADIANT) != 5 or len(DEFAULT_DIRE) != 5:   # patch renamed a hero
+    DEFAULT_RADIANT, DEFAULT_DIRE = HERO_NAMES[:5], HERO_NAMES[5:10]
+
 
 
 # --------------------------------------------------------------------------
@@ -239,16 +272,22 @@ number that should drive decisions. Radiant's structural advantage
         with gr.Row():
             with gr.Column():
                 gr.Markdown("### Radiant")
-                radiant = [gr.Dropdown(HERO_NAMES, label=f"Radiant {i+1}", filterable=True)
-                           for i in range(5)]
+                radiant = [
+                    gr.Dropdown(HERO_NAMES, value=v, label=f"Radiant {i+1}", filterable=True)
+                    for i, v in enumerate(DEFAULT_RADIANT)
+                ]
             with gr.Column():
                 gr.Markdown("### Dire")
-                dire = [gr.Dropdown(HERO_NAMES, label=f"Dire {i+1}", filterable=True)
-                        for i in range(5)]
+                dire = [
+                    gr.Dropdown(HERO_NAMES, value=v, label=f"Dire {i+1}", filterable=True)
+                    for i, v in enumerate(DEFAULT_DIRE)
+                ]
         go = gr.Button("Predict", variant="primary")
         summary = gr.Markdown()
         contrib_table = gr.Dataframe(headers=["Side", "Hero", "Effect"], wrap=True)
         go.click(predict, radiant + dire, [summary, contrib_table])
+        # Render a result immediately so the tab is never blank on arrival.
+        demo.load(predict, radiant + dire, [summary, contrib_table])
 
 if __name__ == "__main__":
     demo.launch()
