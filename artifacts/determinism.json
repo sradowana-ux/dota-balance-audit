@@ -1,0 +1,18 @@
+{
+  "n_test_matches": 10761,
+  "held_out_accuracy": 0.559427562494192,
+  "held_out_auc": 0.5824840522386533,
+  "ceiling_accuracy": 0.5696070778037992,
+  "ceiling_auc": 0.5902542520345057,
+  "gap_to_ceiling_pp": 1.0179515309607146,
+  "probability_spread": {
+    "min": 0.24400216045780918,
+    "max": 0.8077086995585829,
+    "p1": 0.3674825137385682,
+    "p99": 0.6861887652584623,
+    "sd_pp": 6.922373225438851
+  },
+  "share_meaningfully_decided": 0.5112907722330639,
+  "meaningful_threshold_pp": 5.0,
+  "median_edge_pp": 5.148597944533295
+}

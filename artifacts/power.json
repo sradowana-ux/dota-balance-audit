@@ -1,0 +1,105 @@
+{
+  "alpha": 0.05,
+  "power": 0.8,
+  "sample_size_table": [
+    {
+      "effect_pp": 0.5,
+      "hero_games_per_period": 156973
+    },
+    {
+      "effect_pp": 1.0,
+      "hero_games_per_period": 39240
+    },
+    {
+      "effect_pp": 2.0,
+      "hero_games_per_period": 9806
+    },
+    {
+      "effect_pp": 3.0,
+      "hero_games_per_period": 4356
+    },
+    {
+      "effect_pp": 5.0,
+      "hero_games_per_period": 1565
+    }
+  ],
+  "target_effect_pp": 2.0,
+  "hero_games_needed_for_target": 9806,
+  "dataset_matches": 53802,
+  "median_matches_needed": 170547,
+  "median_mde_at_current_n_pp": 3.5617654365434994,
+  "most_picked": [
+    {
+      "name": "Pudge",
+      "pick_rate": 0.29123452659752425,
+      "games": 15669,
+      "matches_needed": 33671,
+      "mde_at_current_n": 1.5825892055465238
+    },
+    {
+      "name": "Lion",
+      "pick_rate": 0.26456265566335824,
+      "games": 14234,
+      "matches_needed": 37065,
+      "mde_at_current_n": 1.6604483032112223
+    },
+    {
+      "name": "Invoker",
+      "pick_rate": 0.20949035351845657,
+      "games": 11271,
+      "matches_needed": 46809,
+      "mde_at_current_n": 1.8659827068637014
+    },
+    {
+      "name": "Sniper",
+      "pick_rate": 0.20798483327757333,
+      "games": 11190,
+      "matches_needed": 47148,
+      "mde_at_current_n": 1.87272408602819
+    },
+    {
+      "name": "Snapfire",
+      "pick_rate": 0.20662800639381435,
+      "games": 11117,
+      "matches_needed": 47458,
+      "mde_at_current_n": 1.8788626650855926
+    }
+  ],
+  "least_picked": [
+    {
+      "name": "Elder Titan",
+      "pick_rate": 0.009553548195234378,
+      "games": 514,
+      "matches_needed": 1026425,
+      "mde_at_current_n": 8.73790422117873
+    },
+    {
+      "name": "Batrider",
+      "pick_rate": 0.012861975391249395,
+      "games": 692,
+      "matches_needed": 762403,
+      "mde_at_current_n": 7.5307077206726465
+    },
+    {
+      "name": "Lycan",
+      "pick_rate": 0.015557042489126798,
+      "games": 837,
+      "matches_needed": 630326,
+      "mde_at_current_n": 6.847406495378926
+    },
+    {
+      "name": "Brewmaster",
+      "pick_rate": 0.015928775881937474,
+      "games": 857,
+      "matches_needed": 615616,
+      "mde_at_current_n": 6.76703509012784
+    },
+    {
+      "name": "Visage",
+      "pick_rate": 0.016077469239061747,
+      "games": 865,
+      "matches_needed": 609922,
+      "mde_at_current_n": 6.7356697528426155
+    }
+  ]
+}

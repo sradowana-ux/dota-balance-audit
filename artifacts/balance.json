@@ -1,0 +1,98 @@
+{
+  "n_matches": 53802,
+  "min_games_threshold": 500,
+  "tolerance_pp": 2.0,
+  "alpha": 0.05,
+  "roster": {
+    "heroes_tested": 126,
+    "min_win_rate": 0.4219081272084806,
+    "max_win_rate": 0.5462870224638718,
+    "spread_pp": 12.437889525539125,
+    "sd_pp": 2.6314822759740513
+  },
+  "hero_tests": {
+    "significant_uncorrected": 63,
+    "expected_false_positives": 6.300000000000001,
+    "significant_after_bh": 59,
+    "outside_tolerance": 18,
+    "nerf_candidates": [
+      "Snapfire",
+      "Wraith King",
+      "Spectre"
+    ],
+    "buff_candidates": [
+      "Gyrocopter",
+      "Nature's Prophet",
+      "Monkey King",
+      "Beastmaster",
+      "Doom",
+      "Shadow Demon",
+      "Kez",
+      "Tiny",
+      "Tusk",
+      "Huskar",
+      "Alchemist",
+      "Timbersaw",
+      "Muerta",
+      "Queen of Pain",
+      "Windranger"
+    ]
+  },
+  "side_balance": {
+    "matches": 53802,
+    "radiant_wins": 28505,
+    "radiant_win_rate": 0.5298130181034162,
+    "p_value": 1.6760220948940577e-43,
+    "ci_low": 0.5255936328250378,
+    "ci_high": 0.5340281463911684,
+    "advantage_pp": 2.981301810341619
+  },
+  "bracket_consistency": {
+    "brackets_compared": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "low_bracket": 1,
+    "high_bracket": 7,
+    "n_heroes": 82,
+    "correlation": 0.29877734960790747,
+    "p_value": 0.006399302592801017,
+    "biggest_divergence": [
+      {
+        "hero_id": 99,
+        "low": 0.5364431486880467,
+        "high": 0.39572192513368987,
+        "delta_pp": -14.07212235543568
+      },
+      {
+        "hero_id": 68,
+        "low": 0.5576923076923077,
+        "high": 0.4583333333333333,
+        "delta_pp": -9.93589743589744
+      },
+      {
+        "hero_id": 32,
+        "low": 0.5833333333333334,
+        "high": 0.4878048780487805,
+        "delta_pp": -9.55284552845529
+      },
+      {
+        "hero_id": 47,
+        "low": 0.5014836795252225,
+        "high": 0.41262135922330095,
+        "delta_pp": -8.88623203019216
+      },
+      {
+        "hero_id": 112,
+        "low": 0.3949579831932773,
+        "high": 0.4819277108433735,
+        "delta_pp": 8.696972765009619
+      }
+    ]
+  }
+}
