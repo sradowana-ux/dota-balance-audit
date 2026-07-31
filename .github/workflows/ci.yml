@@ -23,8 +23,12 @@ jobs:
       - name: Run tests
         run: python -m pytest tests/ -v
 
-      # Fails the build if README.md reports numbers that disagree with
-      # artifacts/report.json -- the README's results table is generated, so a
-      # mismatch means someone edited the claims by hand.
-      - name: Check README matches evaluation artifacts
+      # The README findings and the model results are both generated from
+      # artifacts/. If either has been edited by hand, or the artifacts have
+      # been regenerated without re-rendering, the build fails rather than
+      # letting the write-up quietly overstate what the code produced.
+      - name: Check README matches the analysis artifacts
+        run: python analysis/render_report.py --check
+
+      - name: Check model doc matches the evaluation artifacts
         run: python eval/render_results.py --check
