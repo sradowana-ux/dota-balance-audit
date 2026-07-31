@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-README = ROOT / "README.md"
+README = ROOT / "docs" / "MODEL.md"
 REPORT = ROOT / "artifacts" / "report.json"
 
 START = "<!-- RESULTS:START -->"
