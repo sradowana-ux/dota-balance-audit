@@ -202,6 +202,57 @@ def determinism_plot(det: dict) -> None:
     print("wrote assets/draft_determinism.png")
 
 
+def patch_followup_plot(pf: dict) -> None:
+    """My snapshot's win rate vs. the live win rate pulled after patch 7.41e.
+
+    Every hero on the diagonal moved exactly nowhere; hero position relative
+    to the diagonal is the whole story. Flagged heroes are coloured by verdict;
+    the ones patch 7.41e's notes actually touched get a black ring, so the
+    reader can see at a glance how much of any "it worked" story is riding on
+    heroes Valve never changed.
+    """
+    df = pd.read_csv(ARTIFACTS / "patch_followup.csv")
+
+    fig, ax = plt.subplots(figsize=(7.0, 6.6))
+
+    lo = min(df["win_rate_mine"].min(), df["win_rate_live"].min()) - 0.01
+    hi = max(df["win_rate_mine"].max(), df["win_rate_live"].max()) + 0.01
+    ax.plot([lo, hi], [lo, hi], "--", color=MUTED, lw=1,
+            label="no change between snapshots")
+
+    colour_map = {"nerf candidate": HOT, "buff candidate": COLD, "within tolerance": MUTED}
+    for action, colour in colour_map.items():
+        sub = df[df["action"] == action]
+        ax.scatter(sub["win_rate_mine"], sub["win_rate_live"], s=16, color=colour,
+                   alpha=0.55 if action == "within tolerance" else 0.9,
+                   edgecolor="none", label=action, zorder=3)
+
+    touched = df[df["patch_touched"] != "untouched"]
+    ax.scatter(touched["win_rate_mine"], touched["win_rate_live"], s=70,
+               facecolor="none", edgecolor=INK, linewidth=1.3, zorder=4,
+               label="touched by patch 7.41e")
+    for _, r in touched.iterrows():
+        ax.annotate(f"{r['name_mine']} ({r['patch_touched']})",
+                    (r["win_rate_mine"], r["win_rate_live"]),
+                    textcoords="offset points", xytext=(7, 4), fontsize=7.2, color=INK)
+
+    ax.set_xlabel("win rate, my snapshot (patch 7.41d, 1.9hr window, 2026-07-29)")
+    ax.set_ylabel(f"win rate, live rolling aggregate ({pf['live_snapshot_date']})")
+    n_match, n_flag = pf["n_matches_prediction"], pf["n_flagged"]
+    n_beats, _ = pf["n_beats_null"], pf["n_flagged"]
+    ax.set_title(
+        f"Flagged heroes vs. what actually happened\n"
+        f"{n_match}/{n_flag} moved the predicted direction — but only "
+        f"{n_beats}/{n_flag} beat a pure reversion-to-the-mean null model",
+        pad=12, fontsize=10.5,
+    )
+    ax.legend(frameon=False, fontsize=7.6, loc="lower right")
+    fig.tight_layout()
+    fig.savefig(ASSETS / "patch_followup.png", bbox_inches="tight")
+    plt.close(fig)
+    print("wrote assets/patch_followup.png")
+
+
 def main() -> None:
     balance = json.loads((ARTIFACTS / "balance.json").read_text())
     power = json.loads((ARTIFACTS / "power.json").read_text())
@@ -211,6 +262,10 @@ def main() -> None:
     power_curve_plot(power)
     bracket_plot(balance)
     determinism_plot(det)
+
+    pf_path = ARTIFACTS / "patch_followup.json"
+    if pf_path.exists():
+        patch_followup_plot(json.loads(pf_path.read_text()))
 
 
 if __name__ == "__main__":
