@@ -1,0 +1,69 @@
+{
+  "train_pair_occurrence": {
+    "never": 6,
+    "1_to_9": 635,
+    "10_to_29": 2705,
+    "at_least_30": 12656,
+    "at_least_100": 6169,
+    "total_columns": 16002
+  },
+  "results": {
+    "pairwise_thresh_10": {
+      "accuracy": 0.5644456834866648,
+      "log_loss": 0.6798314379320882,
+      "roc_auc": 0.5854941195611187,
+      "brier": 0.24341405107840466,
+      "best_C": 0.003,
+      "n_features": 15488
+    },
+    "pairwise_thresh_30": {
+      "accuracy": 0.5635164018213921,
+      "log_loss": 0.679859772911035,
+      "roc_auc": 0.5853053724416717,
+      "brier": 0.24342825251984532,
+      "best_C": 0.003,
+      "n_features": 12783
+    },
+    "pairwise_thresh_100": {
+      "accuracy": 0.5633305454883375,
+      "log_loss": 0.679764857264445,
+      "roc_auc": 0.5859099460122879,
+      "brier": 0.24338172798181507,
+      "best_C": 0.003,
+      "n_features": 6296
+    },
+    "pairwise_thresh_300": {
+      "accuracy": 0.5616578384908466,
+      "log_loss": 0.6795882822991538,
+      "roc_auc": 0.587310650145541,
+      "brier": 0.24329638793590377,
+      "best_C": 0.003,
+      "n_features": 1601
+    }
+  },
+  "baseline_linear_auc": 0.5824840522386533,
+  "baseline_linear_accuracy": 0.559427562494192,
+  "baseline_full_pairwise_auc": 0.5854805558552367,
+  "best_config": "pairwise_thresh_300",
+  "verdict": "beats both the linear and full-pairwise models",
+  "mcnemar_vs_shipped": {
+    "mcnemar_reduced300_vs_linear": {
+      "table": [
+        [
+          5425,
+          595
+        ],
+        [
+          619,
+          4122
+        ]
+      ],
+      "statistic": 0.4357495881383855,
+      "p_value": 0.5091811149420449
+    },
+    "shipped_linear_acc": 0.559427562494192,
+    "shipped_linear_auc": 0.5824840522386533,
+    "reduced300_acc": 0.5616578384908466,
+    "reduced300_auc": 0.587310650145541
+  }
+}

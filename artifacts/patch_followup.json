@@ -1,0 +1,1319 @@
+{
+  "live_snapshot_date": "2026-08-01",
+  "n_heroes_compared": 126,
+  "n_flagged": 18,
+  "n_matches_prediction": 13,
+  "direction_test_pvalue": 0.09625244140625,
+  "n_beats_null": 7,
+  "beats_null_pvalue": 0.480682373046875,
+  "reversion_all_heroes": {
+    "slope": -0.16365026846558087,
+    "intercept": -0.039848482058639306,
+    "r": -0.4274058799769996,
+    "p": 5.993779653610098e-07
+  },
+  "reversion_unflagged_only": {
+    "slope": -0.20150509422857088,
+    "intercept": -0.04044450657427847,
+    "r": -0.3974934263279979,
+    "p": 2.0471111119447148e-05
+  },
+  "n_touched_by_741e": 8,
+  "n_untouched_by_741e": 10,
+  "patch_changes": {
+    "Snapfire": {
+      "direction": "nerf",
+      "detail": "Mortimer Kisses burn DPS down, Firesnap Cookie cooldown talent replaced, Mortimer Kisses launch-count talent down."
+    },
+    "Spectre": {
+      "direction": "nerf",
+      "detail": "Level 25 illusion-damage talent down; Haunt illusion damage rescaled down at high levels."
+    },
+    "Doom": {
+      "direction": "mixed",
+      "detail": "Attack range cut 200->175 (nerf), but Infernal Blade burn damage and max-HP-as-damage scaling both increased (buff)."
+    },
+    "Gyrocopter": {
+      "direction": "buff",
+      "detail": "Rocket Barrage and Homing Missile mana costs cut; Homing Missile cooldown cut."
+    },
+    "Beastmaster": {
+      "direction": "nerf",
+      "detail": "Level 20 damage talent and Level 25 Primal Roar cooldown talent both weakened."
+    },
+    "Queen of Pain": {
+      "direction": "buff",
+      "detail": "Shadow Strike mana cost cut; Sonic Wave damage now stacks on quick double-cast."
+    },
+    "Muerta": {
+      "direction": "neutral",
+      "detail": "Gunslinger toggle no longer breaks invisibility -- a quality-of-life fix, not a power change."
+    },
+    "Tiny": {
+      "direction": "nerf",
+      "detail": "Base health regen reduced."
+    }
+  },
+  "heroes": [
+    {
+      "name": "Gyrocopter",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4219081272084806,
+      "win_rate_live": 0.4305,
+      "delta_pp": 0.8591872791519406,
+      "predicted_dir": 1,
+      "matches_prediction": 1.0,
+      "patch_touched": "buff"
+    },
+    {
+      "name": "Nature's Prophet",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4274989274989275,
+      "win_rate_live": 0.4293,
+      "delta_pp": 0.18010725010725315,
+      "predicted_dir": 1,
+      "matches_prediction": 1.0,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Monkey King",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4314086061051857,
+      "win_rate_live": 0.4451,
+      "delta_pp": 1.3691393894814274,
+      "predicted_dir": 1,
+      "matches_prediction": 1.0,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Beastmaster",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4367884961054523,
+      "win_rate_live": 0.4433,
+      "delta_pp": 0.6511503894547743,
+      "predicted_dir": 1,
+      "matches_prediction": 1.0,
+      "patch_touched": "nerf"
+    },
+    {
+      "name": "Doom",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4424594931449938,
+      "win_rate_live": 0.4653,
+      "delta_pp": 2.2840506855006213,
+      "predicted_dir": 1,
+      "matches_prediction": 1.0,
+      "patch_touched": "mixed"
+    },
+    {
+      "name": "Shadow Demon",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4431239388794567,
+      "win_rate_live": 0.444,
+      "delta_pp": 0.08760611205432811,
+      "predicted_dir": 1,
+      "matches_prediction": 1.0,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Batrider",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4465317919075144,
+      "win_rate_live": 0.4318,
+      "delta_pp": -1.473179190751439,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Kez",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4473684210526316,
+      "win_rate_live": 0.4436,
+      "delta_pp": -0.37684210526315876,
+      "predicted_dir": 1,
+      "matches_prediction": 0.0,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Tiny",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4481193255512322,
+      "win_rate_live": 0.4463,
+      "delta_pp": -0.18193255512322093,
+      "predicted_dir": 1,
+      "matches_prediction": 0.0,
+      "patch_touched": "nerf"
+    },
+    {
+      "name": "Tusk",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4500171762281003,
+      "win_rate_live": 0.475,
+      "delta_pp": 2.4982823771899696,
+      "predicted_dir": 1,
+      "matches_prediction": 1.0,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Huskar",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4506693108577094,
+      "win_rate_live": 0.4462,
+      "delta_pp": -0.44693108577094076,
+      "predicted_dir": 1,
+      "matches_prediction": 0.0,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Alchemist",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4516441005802707,
+      "win_rate_live": 0.4706,
+      "delta_pp": 1.8955899419729305,
+      "predicted_dir": 1,
+      "matches_prediction": 1.0,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Timbersaw",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4523172905525847,
+      "win_rate_live": 0.4448,
+      "delta_pp": -0.751729055258471,
+      "predicted_dir": 1,
+      "matches_prediction": 0.0,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Muerta",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4524058577405858,
+      "win_rate_live": 0.4655,
+      "delta_pp": 1.3094142259414243,
+      "predicted_dir": 1,
+      "matches_prediction": 1.0,
+      "patch_touched": "neutral"
+    },
+    {
+      "name": "Queen of Pain",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4583416984541257,
+      "win_rate_live": 0.4648,
+      "delta_pp": 0.645830154587429,
+      "predicted_dir": 1,
+      "matches_prediction": 1.0,
+      "patch_touched": "buff"
+    },
+    {
+      "name": "Death Prophet",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4635832004253057,
+      "win_rate_live": 0.4714,
+      "delta_pp": 0.7816799574694278,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Primal Beast",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4635838150289017,
+      "win_rate_live": 0.4843,
+      "delta_pp": 2.0716184971098284,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Pangolier",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4647171010807374,
+      "win_rate_live": 0.4559,
+      "delta_pp": -0.8817101080737355,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Dark Willow",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4647782333209094,
+      "win_rate_live": 0.4778,
+      "delta_pp": 1.3021766679090607,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Storm Spirit",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4655269058295964,
+      "win_rate_live": 0.4676,
+      "delta_pp": 0.20730941704036332,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Tinker",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4661402976009717,
+      "win_rate_live": 0.4687,
+      "delta_pp": 0.25597023990283074,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Terrorblade",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4662983425414365,
+      "win_rate_live": 0.4684,
+      "delta_pp": 0.21016574585634995,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Lycan",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4671445639187574,
+      "win_rate_live": 0.4856,
+      "delta_pp": 1.845543608124256,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Windranger",
+      "action": "buff candidate",
+      "win_rate_mine": 0.4676052487698195,
+      "win_rate_live": 0.4808,
+      "delta_pp": 1.319475123018049,
+      "predicted_dir": 1,
+      "matches_prediction": 1.0,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Weaver",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4676304211187932,
+      "win_rate_live": 0.4739,
+      "delta_pp": 0.6269578881206772,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Jakiro",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4685351665785299,
+      "win_rate_live": 0.4753,
+      "delta_pp": 0.6764833421470107,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Ursa",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4686858316221766,
+      "win_rate_live": 0.4714,
+      "delta_pp": 0.27141683778234005,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Viper",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4699057287889775,
+      "win_rate_live": 0.4834,
+      "delta_pp": 1.349427121102248,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Sand King",
+      "action": "within tolerance",
+      "win_rate_mine": 0.473249238799478,
+      "win_rate_live": 0.4867,
+      "delta_pp": 1.3450761200522021,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Venomancer",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4737525987525987,
+      "win_rate_live": 0.4741,
+      "delta_pp": 0.03474012474013466,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Broodmother",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4752883031301482,
+      "win_rate_live": 0.5013,
+      "delta_pp": 2.6011696869851777,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Puck",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4752906976744186,
+      "win_rate_live": 0.4697,
+      "delta_pp": -0.559069767441861,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Kunkka",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4763899466869764,
+      "win_rate_live": 0.4919,
+      "delta_pp": 1.551005331302363,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Templar Assassin",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4773123909249563,
+      "win_rate_live": 0.4605,
+      "delta_pp": -1.6812390924956289,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Magnus",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4780976220275344,
+      "win_rate_live": 0.4852,
+      "delta_pp": 0.7102377972465601,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Hoodwink",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4798728813559322,
+      "win_rate_live": 0.4797,
+      "delta_pp": -0.017288135593218623,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Morphling",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4800171895143962,
+      "win_rate_live": 0.4704,
+      "delta_pp": -0.9617189514396218,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Meepo",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4821610601427115,
+      "win_rate_live": 0.5074,
+      "delta_pp": 2.523893985728848,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Largo",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4834437086092715,
+      "win_rate_live": 0.4788,
+      "delta_pp": -0.4643708609271491,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Void Spirit",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4835955056179775,
+      "win_rate_live": 0.493,
+      "delta_pp": 0.940449438202251,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Earthshaker",
+      "action": "within tolerance",
+      "win_rate_mine": 0.484297520661157,
+      "win_rate_live": 0.5025,
+      "delta_pp": 1.8202479338842947,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Mars",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4843568945538818,
+      "win_rate_live": 0.4662,
+      "delta_pp": -1.8156894553881808,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Ring Master",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4844325410110479,
+      "win_rate_live": 0.4789,
+      "delta_pp": -0.5532541011047887,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Shadow Fiend",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4859893252001525,
+      "win_rate_live": 0.4838,
+      "delta_pp": -0.218932520015247,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Clinkz",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4861660079051383,
+      "win_rate_live": 0.4952,
+      "delta_pp": 0.9033992094861665,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Clockwerk",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4862433862433862,
+      "win_rate_live": 0.487,
+      "delta_pp": 0.07566137566137887,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Disruptor",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4869771112865035,
+      "win_rate_live": 0.4988,
+      "delta_pp": 1.1822888713496515,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Bristleback",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4872824631860776,
+      "win_rate_live": 0.4886,
+      "delta_pp": 0.1317536813922382,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Rubick",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4883229313468895,
+      "win_rate_live": 0.4915,
+      "delta_pp": 0.3177068653110515,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Treant Protector",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4895659432387312,
+      "win_rate_live": 0.506,
+      "delta_pp": 1.64340567612688,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Pugna",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4897959183673469,
+      "win_rate_live": 0.4973,
+      "delta_pp": 0.7504081632653092,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Faceless Void",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4900398406374502,
+      "win_rate_live": 0.4927,
+      "delta_pp": 0.2660159362549819,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Lion",
+      "action": "within tolerance",
+      "win_rate_mine": 0.490726429675425,
+      "win_rate_live": 0.4866,
+      "delta_pp": -0.4126429675425036,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Razor",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4908223201174743,
+      "win_rate_live": 0.5,
+      "delta_pp": 0.9177679882525713,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Slark",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4915011263567479,
+      "win_rate_live": 0.4943,
+      "delta_pp": 0.2798873643252098,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Dark Seer",
+      "action": "within tolerance",
+      "win_rate_mine": 0.491898898250162,
+      "win_rate_live": 0.4878,
+      "delta_pp": -0.4098898250161964,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Naga Siren",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4925893635571055,
+      "win_rate_live": 0.4764,
+      "delta_pp": -1.6189363557105485,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Ember Spirit",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4928617780661908,
+      "win_rate_live": 0.4928,
+      "delta_pp": -0.006177806619078741,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Warlock",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4932759548144163,
+      "win_rate_live": 0.4919,
+      "delta_pp": -0.13759548144162692,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Enchantress",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4953846153846153,
+      "win_rate_live": 0.477,
+      "delta_pp": -1.8384615384615333,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Sven",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4959278650378126,
+      "win_rate_live": 0.5031,
+      "delta_pp": 0.7172134962187382,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Oracle",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4961460446247464,
+      "win_rate_live": 0.4936,
+      "delta_pp": -0.2546044624746391,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Enigma",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4976437323279924,
+      "win_rate_live": 0.5025,
+      "delta_pp": 0.48562676720075304,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Lina",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4978554578597469,
+      "win_rate_live": 0.4939,
+      "delta_pp": -0.39554578597468804,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Winter Wyvern",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4980409229429691,
+      "win_rate_live": 0.4919,
+      "delta_pp": -0.6140922942969085,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Omniknight",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4986876640419947,
+      "win_rate_live": 0.4996,
+      "delta_pp": 0.09123359580052726,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Earth Spirit",
+      "action": "within tolerance",
+      "win_rate_mine": 0.498960498960499,
+      "win_rate_live": 0.5,
+      "delta_pp": 0.10395010395010118,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Skywrath Mage",
+      "action": "within tolerance",
+      "win_rate_mine": 0.499046221570066,
+      "win_rate_live": 0.5008,
+      "delta_pp": 0.17537784299340164,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Sniper",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4993744414655943,
+      "win_rate_live": 0.4996,
+      "delta_pp": 0.022555853440570095,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Brewmaster",
+      "action": "within tolerance",
+      "win_rate_mine": 0.499416569428238,
+      "win_rate_live": 0.509,
+      "delta_pp": 0.958343057176203,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Slardar",
+      "action": "within tolerance",
+      "win_rate_mine": 0.4996239659062421,
+      "win_rate_live": 0.5005,
+      "delta_pp": 0.08760340937578603,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Techies",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5015235705323534,
+      "win_rate_live": 0.505,
+      "delta_pp": 0.3476429467646591,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Marci",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5022461814914645,
+      "win_rate_live": 0.4981,
+      "delta_pp": -0.4146181491464507,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Luna",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5024006145573267,
+      "win_rate_live": 0.5009,
+      "delta_pp": -0.15006145573266405,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Ogre Magi",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5027796308650211,
+      "win_rate_live": 0.5083,
+      "delta_pp": 0.5520369134978886,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Lone Druid",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5033751205400193,
+      "win_rate_live": 0.4882,
+      "delta_pp": -1.5175120540019293,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Dragon Knight",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5035169988276671,
+      "win_rate_live": 0.4936,
+      "delta_pp": -0.9916998827667112,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Mirana",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5037001671043209,
+      "win_rate_live": 0.5116,
+      "delta_pp": 0.7899832895679193,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Outworld Devourer",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5038206826286297,
+      "win_rate_live": 0.503,
+      "delta_pp": -0.08206826286296653,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Arc Warden",
+      "action": "within tolerance",
+      "win_rate_mine": 0.50390625,
+      "win_rate_live": 0.5073,
+      "delta_pp": 0.3393749999999973,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Anti-Mage",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5040796570322224,
+      "win_rate_live": 0.4956,
+      "delta_pp": -0.8479657032222365,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Bane",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5041589648798521,
+      "win_rate_live": 0.5016,
+      "delta_pp": -0.2558964879852077,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Underlord",
+      "action": "within tolerance",
+      "win_rate_mine": 0.505989110707804,
+      "win_rate_live": 0.4991,
+      "delta_pp": -0.6889110707803958,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Riki",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5059978189749182,
+      "win_rate_live": 0.5217,
+      "delta_pp": 1.5702181025081807,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Phoenix",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5060897435897436,
+      "win_rate_live": 0.5071,
+      "delta_pp": 0.10102564102564271,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Bloodseeker",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5061728395061729,
+      "win_rate_live": 0.5192,
+      "delta_pp": 1.3027160493827128,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Silencer",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5070643642072213,
+      "win_rate_live": 0.5093,
+      "delta_pp": 0.2235635792778634,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Phantom Lancer",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5072992700729927,
+      "win_rate_live": 0.5206,
+      "delta_pp": 1.330072992700726,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Bounty Hunter",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5080256821829856,
+      "win_rate_live": 0.5154,
+      "delta_pp": 0.7374317817014364,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Phantom Assassin",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5088594958822061,
+      "win_rate_live": 0.5074,
+      "delta_pp": -0.14594958822061743,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Elder Titan",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5097276264591439,
+      "win_rate_live": 0.5091,
+      "delta_pp": -0.06276264591439373,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Invoker",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5104249844734274,
+      "win_rate_live": 0.5104,
+      "delta_pp": -0.0024984473427469567,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Juggernaut",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5105191086767086,
+      "win_rate_live": 0.5168,
+      "delta_pp": 0.628089132329146,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Keeper of the Light",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5110470701248799,
+      "win_rate_live": 0.5057,
+      "delta_pp": -0.5347070124879894,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Centaur Warrunner",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5112612612612613,
+      "win_rate_live": 0.5092,
+      "delta_pp": -0.20612612612612713,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Visage",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5121387283236994,
+      "win_rate_live": 0.5195,
+      "delta_pp": 0.7361271676300518,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Tidehunter",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5122167925366504,
+      "win_rate_live": 0.5008,
+      "delta_pp": -1.14167925366504,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Pudge",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5136894505073712,
+      "win_rate_live": 0.5145,
+      "delta_pp": 0.08105494926287093,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Drow Ranger",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5140715109573241,
+      "win_rate_live": 0.5032,
+      "delta_pp": -1.0871510957324082,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Grimstroke",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5142198308993082,
+      "win_rate_live": 0.5147,
+      "delta_pp": 0.04801691006918185,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Ancient Apparition",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5143760782058654,
+      "win_rate_live": 0.5128,
+      "delta_pp": -0.1576078205865361,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Medusa",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5145903479236813,
+      "win_rate_live": 0.4966,
+      "delta_pp": -1.7990347923681316,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Troll Warlord",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5161516853932584,
+      "win_rate_live": 0.5053,
+      "delta_pp": -1.0851685393258426,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Witch Doctor",
+      "action": "within tolerance",
+      "win_rate_mine": 0.518381553186861,
+      "win_rate_live": 0.518,
+      "delta_pp": -0.03815531868609501,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Chaos Knight",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5188720173535791,
+      "win_rate_live": 0.508,
+      "delta_pp": -1.0872017353579122,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Undying",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5200489329889901,
+      "win_rate_live": 0.5222,
+      "delta_pp": 0.21510670110098662,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Shadow Shaman",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5220703562626037,
+      "win_rate_live": 0.5177,
+      "delta_pp": -0.4370356262603625,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Zeus",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5222527752316937,
+      "win_rate_live": 0.5136,
+      "delta_pp": -0.8652775231693721,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Nyx Assassin",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5227199484369964,
+      "win_rate_live": 0.5184,
+      "delta_pp": -0.4319948436996457,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Crystal Maiden",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5235394214407261,
+      "win_rate_live": 0.5148,
+      "delta_pp": -0.8739421440726036,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Lifestealer",
+      "action": "within tolerance",
+      "win_rate_mine": 0.523879380603097,
+      "win_rate_live": 0.5249,
+      "delta_pp": 0.10206193969030108,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Necrophos",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5239242685025818,
+      "win_rate_live": 0.5202,
+      "delta_pp": -0.37242685025817845,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Io",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5244094488188976,
+      "win_rate_live": 0.5087,
+      "delta_pp": -1.5709448818897576,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Dawnbreaker",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5244633533165732,
+      "win_rate_live": 0.5185,
+      "delta_pp": -0.5963353316573272,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Spirit Breaker",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5257831325301204,
+      "win_rate_live": 0.5173,
+      "delta_pp": -0.8483132530120452,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Legion Commander",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5258762644083745,
+      "win_rate_live": 0.526,
+      "delta_pp": 0.012373559162548453,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Lich",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5268009559576647,
+      "win_rate_live": 0.5242,
+      "delta_pp": -0.2600955957664741,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Vengeful Spirit",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5268739105171412,
+      "win_rate_live": 0.5329,
+      "delta_pp": 0.6026089482858876,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Dazzle",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5275091697232411,
+      "win_rate_live": 0.5064,
+      "delta_pp": -2.1109169723241172,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Night Stalker",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5275862068965518,
+      "win_rate_live": 0.524,
+      "delta_pp": -0.3586206896551758,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Axe",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5276016411786647,
+      "win_rate_live": 0.5175,
+      "delta_pp": -1.0101641178664744,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Leshrac",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5314285714285715,
+      "win_rate_live": 0.5159,
+      "delta_pp": -1.5528571428571447,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Abaddon",
+      "action": "within tolerance",
+      "win_rate_mine": 0.5350993377483444,
+      "win_rate_live": 0.5113,
+      "delta_pp": -2.379933774834442,
+      "predicted_dir": 0,
+      "matches_prediction": NaN,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Snapfire",
+      "action": "nerf candidate",
+      "win_rate_mine": 0.5421426643878744,
+      "win_rate_live": 0.5291,
+      "delta_pp": -1.304266438787438,
+      "predicted_dir": -1,
+      "matches_prediction": 1.0,
+      "patch_touched": "nerf"
+    },
+    {
+      "name": "Wraith King",
+      "action": "nerf candidate",
+      "win_rate_mine": 0.5434884814292431,
+      "win_rate_live": 0.5459,
+      "delta_pp": 0.2411518570756943,
+      "predicted_dir": -1,
+      "matches_prediction": 0.0,
+      "patch_touched": "untouched"
+    },
+    {
+      "name": "Spectre",
+      "action": "nerf candidate",
+      "win_rate_mine": 0.5462870224638718,
+      "win_rate_live": 0.5417,
+      "delta_pp": -0.45870224638718815,
+      "predicted_dir": -1,
+      "matches_prediction": 1.0,
+      "patch_touched": "nerf"
+    }
+  ]
+}
