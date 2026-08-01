@@ -104,6 +104,33 @@ cannot distinguish it from the linear model (p ≈ 0.13). Notably its learning
 curve has *not* flattened, so with several hundred thousand matches it would
 likely pull ahead — that is the one route to a better number.
 
+**Follow-up: trimming the pairwise set to well-observed pairs.** Most of those
+16,000 columns are close to useless by construction — 12,656 of them are seen
+fewer than 30 times across 43,041 training matches, nowhere near enough to
+estimate a pair-specific weight, and regularisation has to spend its budget
+suppressing them. `analysis/reduced_pairwise_experiment.py` keeps only pairs
+observed at least *k* times and refits at several thresholds:
+
+| Min. co-occurrences | Features kept | Accuracy | ROC-AUC |
+|---|---|---|---|
+| 10 | 15,488 | 0.5644 | 0.5855 |
+| 30 | 12,783 | 0.5635 | 0.5853 |
+| 100 | 6,296 | 0.5633 | 0.5859 |
+| 300 | 1,601 | 0.5617 | **0.5873** |
+
+Cutting the feature count by 90% (16,002 → 1,601) nudges AUC from 0.5855 to
+0.5873 — a real, monotonic improvement as noisier pairs are dropped, and it
+now edges out the shipped linear model's 0.5825 too. But McNemar's test on the
+best config (threshold 300) against the shipped linear model still returns
+p = 0.51: statistically indistinguishable, same as the untrimmed pairwise
+model. Accuracy actually *drops* slightly as the threshold rises (0.5644 →
+0.5617), so the AUC gain is a calibration/ranking improvement, not more
+correct predictions. Verdict: trimming to well-observed pairs is a genuine,
+principled improvement over the naive pairwise model, but it does not clear
+the bar this project holds — outperforming the plain linear model by a
+margin McNemar's test can detect. The result is included because a negative
+result that rules out an obvious fix is still information.
+
 **Low-rank interactions, factorization-machine style.** Each hero gets an
 embedding and every pair's interaction is derived as a dot product, cutting
 16,000 interaction weights to about 2,000. It performs *worse* than the plain
