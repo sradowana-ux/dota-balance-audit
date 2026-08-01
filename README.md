@@ -137,6 +137,15 @@ This audit is a snapshot, so it can measure the state of balance but not whether
 Valve's interventions are what produced it. That is the obvious next study, and
 the power analysis above is what sizes it.
 
+A preview of that study, run on data not built for it: patch 7.41e shipped
+about 30 hours after this dataset was collected. [`docs/PATCH_FOLLOWUP.md`](docs/PATCH_FOLLOWUP.md)
+checks the 18 flagged heroes against live win rates pulled afterward — 13 of
+18 moved the predicted direction, but only 7 beat a reversion-to-the-mean null
+model fit on the *unflagged* heroes (binomial p = 0.48). The honest result is
+inconclusive, and the writeup explains why a single before/after snapshot
+can't tell "the audit was right" apart from "small samples regress to the
+mean" — which is exactly the argument for the properly sized study above.
+
 ---
 
 ## Method
