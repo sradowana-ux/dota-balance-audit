@@ -47,8 +47,8 @@ def render() -> str:
         "",
         "### 1. The roster is tightly balanced, but not perfectly",
         "",
-        f"Win rates span **{roster['min_win_rate']:.1%} to {roster['max_win_rate']:.1%}** "
-        f"— a {roster['spread_pp']:.1f} point range, standard deviation "
+        f"Win rates span **{roster['min_win_rate']:.1%} to {roster['max_win_rate']:.1%}**, "
+        f"a {roster['spread_pp']:.1f} point range, standard deviation "
         f"{roster['sd_pp']:.2f}pp. For a game with {roster['heroes_tested']} "
         "asymmetric heroes, that is a narrow band.",
         "",
@@ -67,13 +67,13 @@ def render() -> str:
         "### 2. At this sample size, statistical significance is the wrong question",
         "",
         f"Testing every hero against 50%, **{tests['significant_uncorrected']} of "
-        f"{roster['heroes_tested']}** come back significant at α={b['alpha']} — against "
+        f"{roster['heroes_tested']}** come back significant at α={b['alpha']}, against "
         f"roughly {tests['expected_false_positives']:.0f} expected by chance. Applying "
         f"Benjamini–Hochberg FDR correction removes almost nothing: "
         f"**{tests['significant_after_bh']}** still survive.",
         "",
         "That is the finding, not a footnote. With 50,000 matches the tests are so "
-        "well powered that a hero sitting 0.8 points off even is detectable — and "
+        "well powered that a hero sitting 0.8 points off even is detectable, and "
         "completely irrelevant to a balance decision. **Significance stopped "
         "discriminating; effect size has to do the work.**",
         "",
@@ -91,7 +91,7 @@ def render() -> str:
         "",
         f"Radiant wins **{side['radiant_win_rate']:.2%}** of matches "
         f"[{side['ci_low']:.2%}, {side['ci_high']:.2%}], "
-        f"p = {side['p_value']:.1e} — a **{side['advantage_pp']:.1f} point** structural "
+        f"p = {side['p_value']:.1e}, a **{side['advantage_pp']:.1f} point** structural "
         "edge before a single hero is picked. Only three heroes deviate from even by "
         "more than the side you were assigned does.",
         "",
