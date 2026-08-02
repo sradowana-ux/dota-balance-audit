@@ -1,15 +1,24 @@
 # Is Dota 2 Balanced?
 
-A statistical audit of hero, side and draft balance across 53,802 ranked
-matches from the OpenDota API.
+Every player who is losing a match says it eventually. Hero whiffs a
+teamfight, the lane goes sideways, and out comes the sarcastic "wow, truly a
+balanced game." It is one of the oldest and most reliable jokes in the entire
+community, and it is aimed at whichever hero happens to be losing that
+particular argument on that particular day. Nobody ever checks the claim.
+They just say it, requeue, and blame the next hero instead.
+
+Underneath the joke is a real, testable question, and testable questions are
+what this project is for. Valve rebalances Dota 2 every few weeks across 126
+heroes, so I pulled 53,802 ranked matches from the OpenDota API and ran them
+through the same toolkit a professional balance review would use: Wilson
+confidence intervals, Benjamini-Hochberg correction across 126 simultaneous
+hypothesis tests, and a power analysis for how much data any of this actually
+requires before a claim is worth trusting.
 
 [![Demo](https://img.shields.io/badge/LIVE_DEMO-c8aa6e?style=flat-square&labelColor=0d1117)](https://huggingface.co/spaces/Radowana/dota-balance-audit)
 [![Python](https://img.shields.io/badge/PYTHON-3.10+-c8aa6e?style=flat-square&labelColor=0d1117)](https://www.python.org)
 [![SQL](https://img.shields.io/badge/SQL-DUCKDB-c8aa6e?style=flat-square&labelColor=0d1117)](https://duckdb.org)
 [![License](https://img.shields.io/badge/LICENSE-MIT-c8aa6e?style=flat-square&labelColor=0d1117)](LICENSE)
-
-Valve rebalances Dota 2 every few weeks across 126 heroes. This asks whether it
-works, and — more usefully — how anyone would be able to tell.
 
 **Short answer: yes, tightly, with three specific exceptions and one structural
 imbalance nobody can patch.** The longer answer is that the interesting problem
@@ -26,7 +35,7 @@ Based on **53,802** ranked All Draft matches, covering **126** heroes with at le
 
 ### 1. The roster is tightly balanced, but not perfectly
 
-Win rates span **42.2% to 54.6%** — a 12.4 point range, standard deviation 2.63pp. For a game with 126 asymmetric heroes, that is a narrow band.
+Win rates span **42.2% to 54.6%**, a 12.4 point range, standard deviation 2.63pp. For a game with 126 asymmetric heroes, that is a narrow band.
 
 | | Hero | Games | Win rate | 95% CI |
 |---|---|---|---|---|
@@ -39,9 +48,9 @@ Win rates span **42.2% to 54.6%** — a 12.4 point range, standard deviation 2.6
 
 ### 2. At this sample size, statistical significance is the wrong question
 
-Testing every hero against 50%, **63 of 126** come back significant at α=0.05 — against roughly 6 expected by chance. Applying Benjamini–Hochberg FDR correction removes almost nothing: **59** still survive.
+Testing every hero against 50%, **63 of 126** come back significant at α=0.05, against roughly 6 expected by chance. Applying Benjamini–Hochberg FDR correction removes almost nothing: **59** still survive.
 
-That is the finding, not a footnote. With 50,000 matches the tests are so well powered that a hero sitting 0.8 points off even is detectable — and completely irrelevant to a balance decision. **Significance stopped discriminating; effect size has to do the work.**
+That is the finding, not a footnote. With 50,000 matches the tests are so well powered that a hero sitting 0.8 points off even is detectable, and completely irrelevant to a balance decision. **Significance stopped discriminating; effect size has to do the work.**
 
 Applying a practical tolerance of ±2pp and requiring the whole confidence interval to clear it, the 59 "significant" heroes reduce to **18 genuinely actionable ones**:
 
@@ -50,7 +59,7 @@ Applying a practical tolerance of ±2pp and requiring the whole confidence inter
 
 ### 3. Radiant's map advantage is real and larger than any hero effect
 
-Radiant wins **52.98%** of matches [52.56%, 53.40%], p = 1.7e-43 — a **3.0 point** structural edge before a single hero is picked. Only three heroes deviate from even by more than the side you were assigned does.
+Radiant wins **52.98%** of matches [52.56%, 53.40%], p = 1.7e-43, a **3.0 point** structural edge before a single hero is picked. Only three heroes deviate from even by more than the side you were assigned does.
 
 ### 4. "Balanced" means different things at different ranks
 
@@ -115,7 +124,7 @@ significant only because the sample is large, and adjusting them would be
 responding to noise with extra steps.
 
 **2. Treat the fifteen underperformers as one problem, not fifteen.** They are
-disproportionately high-execution heroes — Monkey King, Queen of Pain,
+disproportionately high-execution heroes, including Monkey King, Queen of Pain,
 Timbersaw, Nature's Prophet. A hero that requires skill to pilot *should* show a
 sub-50% average across all ranks; that is the mechanic working, not a bug. Buffing
 them uniformly would break them at the top. This is where a global win rate is
@@ -139,12 +148,12 @@ the power analysis above is what sizes it.
 
 A preview of that study, run on data not built for it: patch 7.41e shipped
 about 30 hours after this dataset was collected. [`docs/PATCH_FOLLOWUP.md`](docs/PATCH_FOLLOWUP.md)
-checks the 18 flagged heroes against live win rates pulled afterward — 13 of
+checks the 18 flagged heroes against live win rates pulled afterward. 13 of
 18 moved the predicted direction, but only 7 beat a reversion-to-the-mean null
 model fit on the *unflagged* heroes (binomial p = 0.48). The honest result is
 inconclusive, and the writeup explains why a single before/after snapshot
 can't tell "the audit was right" apart from "small samples regress to the
-mean" — which is exactly the argument for the properly sized study above.
+mean," which is exactly the argument for the properly sized study above.
 
 ---
 
@@ -162,7 +171,7 @@ the counting is set-shaped work that belongs in a database, and keeping it there
 means the aggregates can be inspected independently of the tests applied to them.
 
 `sql/01_build_tables.sql` unpivots each match's two hero lists into one row per
-hero per match — the grain almost every balance question is actually asked at —
+hero per match, the grain almost every balance question is actually asked at,
 and asserts that every match produces exactly ten rows. If that check fails the
 pipeline aborts, because a broken unpivot would silently corrupt every number
 downstream.
@@ -173,7 +182,7 @@ downstream.
 sample sizes from 500 to 15,000. Wilson behaves correctly across that range;
 the normal approximation misbehaves in the tails.
 
-**Benjamini–Hochberg, not Bonferroni.** This is a screening exercise — the goal
+**Benjamini–Hochberg, not Bonferroni.** This is a screening exercise, and the goal
 is a shortlist of heroes worth investigating, so controlling the false discovery
 rate is both more appropriate and more powerful than controlling the
 family-wise error rate.
@@ -188,7 +197,7 @@ stakeholders, and at n = 53,802 it is unavoidable unless handled explicitly.
 **The model as an instrument.** The win-probability model
 (`src/train.py`, logistic regression on signed hero indicators) is not the
 product here. It exists to measure how much outcome the draft explains. Its
-modest accuracy is the evidence, not an apology — and the in-sample ceiling
+modest accuracy is the evidence, not an apology, and the in-sample ceiling
 shows it is within about a point of everything a hero-additive model could
 extract. Model details, baselines and calibration are in
 [docs/MODEL.md](docs/MODEL.md).
@@ -286,7 +295,7 @@ app.py                        balance dashboard + draft explorer
 
 ## Licence
 
-MIT — see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).
 
 Match data from the [OpenDota API](https://docs.opendota.com/), used under its
 terms. Not affiliated with Valve Corporation.
